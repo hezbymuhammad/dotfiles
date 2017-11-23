@@ -46,7 +46,7 @@ To activate dark solarize theme in Terminator just right click on the terminal,
 
 Restart Terminator and you're done!
 
-## Aditional
+## Additional
 ##### RVM users
 ```bash
 RPROMPT="\$(~/.rvm/bin/rvm-prompt s i v g)%{$fg[yellow]%}[%*]"
@@ -54,4 +54,24 @@ RPROMPT="\$(~/.rvm/bin/rvm-prompt s i v g)%{$fg[yellow]%}[%*]"
 ##### Rbenv users
 ```bash
 RPROMPT='%{$fg[yellow]%}$(rbenv version-name)%{$reset_color%}%'
+```
+
+##### Silver Searcher
+Ag is faster than ack
+
+```bash
+apt-get install silversearcher-ag
+```
+
+##### Youcompleteme
+```bash
+sudo apt-get install build-essential cmake3 # cmake on >= 16.04
+cd ~/.vim/bundle/YouCompleteMe
+./install.py --all
+```
+
+##### Fuzzy Finder
+```bash
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
 ```
