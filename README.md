@@ -56,11 +56,16 @@ RPROMPT="\$(~/.rvm/bin/rvm-prompt s i v g)%{$fg[yellow]%}[%*]"
 RPROMPT='%{$fg[yellow]%}$(rbenv version-name)%{$reset_color%}%'
 ```
 
+##### Vundle
+```bash
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+```
+
 ##### Silver Searcher
 Ag is faster than ack
 
 ```bash
-apt-get install silversearcher-ag
+sudo apt-get install silversearcher-ag
 ```
 
 ##### Youcompleteme
