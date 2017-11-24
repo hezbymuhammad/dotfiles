@@ -18,16 +18,15 @@ sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/i
 ## Powerline Font
 ```bash
 cd
-wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
-wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
-mv PowerlineSymbols.otf ~/.fonts/
-mkdir -p .config/fontconfig/conf.d #if directory doesn't exists
-fc-cache -vf ~/.fonts/
-mv 10-powerline-symbols.conf ~/.config/fontconfig/conf.d/
+git clone https://github.com/powerline/fonts.git --depth=1
+./fonts/install.sh
+rm -rf fonts
 ```
 
+after that change font in terminal to any of powerline font
+
 ## Solarize Theme
-```dconf``` is required
+```dconf``` is required for ubuntu
 ```bash
 sudo apt-get install dconf-cli
 ```
@@ -65,14 +64,15 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 Ag is faster than ack
 
 ```bash
-sudo apt-get install silversearcher-ag
+sudo apt-get install silversearcher-ag # ubuntu
+brew install the_silver_searcher # macos
 ```
 
 ##### Youcompleteme
 ```bash
 sudo apt-get install build-essential cmake3 # cmake on >= 16.04
 cd ~/.vim/bundle/YouCompleteMe
-./install.py --all
+./install.py --cs-completer --js-completer --go-completer
 ```
 
 ##### Fuzzy Finder
