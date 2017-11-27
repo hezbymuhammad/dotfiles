@@ -80,3 +80,8 @@ cd ~/.vim/bundle/YouCompleteMe
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 ```
+
+##### Docker Machine Completion
+```
+git clone https://github.com/leonhartX/docker-machine-zsh-completion.git ~/.oh-my-zsh/custom/plugins/docker-machine
+```
