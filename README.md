@@ -6,7 +6,7 @@ My collection of dot files
 - terminator
 - zsh
 - vim
-- tmux
+- tmux ( >= 2.3)
 - rvm + ruby
 
 ## Oh My ZSH
@@ -90,4 +90,9 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ##### Docker Machine Completion
 ```
 git clone https://github.com/leonhartX/docker-machine-zsh-completion.git ~/.oh-my-zsh/custom/plugins/docker-machine
+```
+
+#### ASDF Version Manager
+```bash
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.4.1
 ```
