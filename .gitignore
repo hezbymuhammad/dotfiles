@@ -1,1 +1,5 @@
 .swp
+.vscode
+.editorconfig
+
+_vendor
