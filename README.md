@@ -68,11 +68,17 @@ sudo apt-get install silversearcher-ag # ubuntu
 brew install the_silver_searcher # macos
 ```
 
-##### Youcompleteme
+#### Deoplete
+vim has to support python3
+
 ```bash
-sudo apt-get install build-essential cmake3 # cmake on >= 16.04
-cd ~/.vim/bundle/YouCompleteMe
-./install.py --cs-completer --js-completer --go-completer
+:echo has("python3")
+```
+
+#### Vim-go
+
+```bash
+:GoInstallBinaries
 ```
 
 ##### Fuzzy Finder

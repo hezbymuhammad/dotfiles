@@ -10,7 +10,6 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'valloric/youcompleteme'
 Plugin 'tpope/vim-rhubarb'
 Plugin 'tpope/vim-rails'
 Plugin 'vim-ruby/vim-ruby'
@@ -20,7 +19,6 @@ Plugin 'tomtom/tlib_vim'
 Plugin 'tpope/vim-endwise'
 Plugin 'mileszs/ack.vim'
 Plugin 'jiangmiao/auto-pairs'
-Plugin 'Chiel92/vim-autoformat'
 Plugin 'tpope/vim-sleuth'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'terryma/vim-multiple-cursors'
@@ -31,6 +29,14 @@ Plugin 'junegunn/fzf'
 Plugin 'itchyny/lightline.vim'
 Plugin 'w0rp/ale'
 Plugin 'roxma/vim-tmux-clipboard'
+Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'godlygeek/tabular'
+Plugin 'shougo/deoplete.nvim'
+Plugin 'fatih/vim-go'
+Plugin 'roxma/vim-hug-neovim-rpc'
+Plugin 'roxma/nvim-yarp'
+Plugin 'majutsushi/tagbar'
+Plugin 'suan/vim-instant-markdown'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -92,8 +98,18 @@ endif
 syntax enable
 set background=dark
 let g:gruvbox_italic=1
-colorscheme dracula
-"hi LineNr       term=bold cterm=bold ctermfg=2 guifg=Grey guibg=Grey90
+colorscheme PaperColor
+hi LineNr       term=bold cterm=bold ctermfg=2 guifg=Grey guibg=Grey90
+let g:PaperColor_Theme_Options = {
+  \   'theme': {
+  \     'default.dark': { 
+  \       'override' : {
+  \         'color00' : ['#d3f4ff', '232'],
+  \         'linenumber_bg' : ['#d3f4ff', '232']
+  \       }
+  \     }
+  \   }
+  \ }
 
 " NERDtree
 autocmd StdinReadPre * let s:std_in=1
@@ -101,7 +117,7 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 map <C-\> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" Tagline
+" Tagbar
 nmap <F8> :TagbarToggle<CR>
 
 " Fzf
@@ -250,9 +266,6 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 "command -nargs=+ -complete=file -bar Ack silent! grep! <args>|cwindow|redraw!
 nnoremap \ :Ack<SPACE>
 
-" Autoformat
-noremap <F3> :Autoformat<CR>
-
 " Easyclip
 nnoremap gm m
 let g:EasyClipAutoFormat = 1
@@ -271,3 +284,17 @@ let g:paste_easy_enable=0
 
 " erb file
 autocmd BufRead,BufNewFile *.erb set filetype=eruby.html
+
+" deoplete
+let g:deoplete#enable_at_startup = 1
+" Let <Tab> also do completion
+inoremap <silent><expr> <Tab>
+\ pumvisible() ? "\<C-n>" :
+\ deoplete#mappings#manual_complete()
+
+" Close the documentation window when completion is done
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+
+" Markdown
+let g:instant_markdown_slow = 1
+let g:instant_markdown_autostart = 0
