@@ -25,41 +25,6 @@ rm -rf fonts
 
 after that change font in terminal to any of powerline font
 
-## Solarize Theme
-```dconf``` is required for ubuntu
-```bash
-sudo apt-get install dconf-cli
-```
-
-```bash
-git clone git://github.com/sigurdga/gnome-terminal-colors-solarized.git ~/.solarized
-cd ~/.solarized
-./install.sh
-```
-- Choose **option 1** (dark theme).  
-- Choose **option 1** to download seebi' dircolors-solarized
-
-To activate dark solarize theme in Terminator just right click on the terminal, 
-> Preferences>Profiles>Colors>Foreground and Background>Built-in schemes: Solarized dark
-> Preferences>Profiles>Colors>Palette>Built-in schemes: Solarized
-
-Restart Terminator and you're done!
-
-## Additional
-##### RVM users
-```bash
-RPROMPT="\$(~/.rvm/bin/rvm-prompt s i v g)%{$fg[yellow]%}[%*]"
-```
-##### Rbenv users
-```bash
-RPROMPT='%{$fg[yellow]%}$(rbenv version-name)%{$reset_color%}%'
-```
-
-##### Vundle
-```bash
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-```
-
 ##### Silver Searcher
 Ag is faster than ack
 
@@ -73,12 +38,6 @@ vim has to support python3
 
 ```bash
 :echo has("python3")
-```
-
-#### Vim-go
-
-```bash
-:GoInstallBinaries
 ```
 
 ##### Fuzzy Finder
