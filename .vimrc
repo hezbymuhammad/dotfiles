@@ -1,51 +1,48 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
+call plug#begin('~/.vim/plugged')
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+Plug 'tpope/vim-fugitive'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-rails'
+Plug 'vim-ruby/vim-ruby'
+Plug 'slim-template/vim-slim'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'tpope/vim-endwise'
+Plug 'mileszs/ack.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-sleuth'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'dracula/vim'
+Plug 'othree/html5.vim'
+Plug 'junegunn/fzf'
+Plug 'roxma/vim-tmux-clipboard'
+Plug 'godlygeek/tabular'
+Plug 'shougo/deoplete.nvim'
+Plug 'fatih/vim-go'
+Plug 'tpope/vim-surround'
+Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'roxma/nvim-yarp'
+Plug 'majutsushi/tagbar'
+Plug 'suan/vim-instant-markdown'
+Plug 'wakatime/vim-wakatime'
+Plug 'jparise/vim-graphql'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 
-Plugin 'VundleVim/Vundle.vim'
+call plug#end()
 
-Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-rhubarb'
-Plugin 'tpope/vim-rails'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'slim-template/vim-slim'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'tpope/vim-endwise'
-Plugin 'mileszs/ack.vim'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'tpope/vim-sleuth'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'tmux-plugins/vim-tmux-focus-events'
-Plugin 'dracula/vim'
-Plugin 'othree/html5.vim'
-Plugin 'junegunn/fzf'
-Plugin 'itchyny/lightline.vim'
-Plugin 'w0rp/ale'
-Plugin 'roxma/vim-tmux-clipboard'
-Plugin 'NLKNguyen/papercolor-theme'
-Plugin 'godlygeek/tabular'
-Plugin 'shougo/deoplete.nvim'
-Plugin 'fatih/vim-go'
-Plugin 'roxma/vim-hug-neovim-rpc'
-Plugin 'roxma/nvim-yarp'
-Plugin 'majutsushi/tagbar'
-Plugin 'suan/vim-instant-markdown'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
 filetype on
 filetype plugin on    " required
 filetype indent on
 
 " basic setting
 set t_Co=256
+colorscheme dracula
 "set termguicolors
 set nu
 let mapleader=" "
@@ -94,28 +91,24 @@ if exists("+undofile")
   set undofile
 endif
 
+" Expert mode
+nnoremap <Left> :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up> :echoe "Use k"<CR>
+nnoremap <Down> :echoe "Use j"<CR>
+
+" Make it obvious where 80 characters is
+set textwidth=80
+set colorcolumn=+1
+
 " Theme
 syntax enable
-set background=dark
+"set background=dark
 let g:gruvbox_italic=1
-colorscheme PaperColor
 hi LineNr       term=bold cterm=bold ctermfg=2 guifg=Grey guibg=Grey90
-let g:PaperColor_Theme_Options = {
-  \   'theme': {
-  \     'default.dark': { 
-  \       'override' : {
-  \         'color00' : ['#d3f4ff', '232'],
-  \         'linenumber_bg' : ['#d3f4ff', '232']
-  \       }
-  \     }
-  \   }
-  \ }
 
 " NERDtree
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 map <C-\> :NERDTreeToggle<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
@@ -123,58 +116,6 @@ nmap <F8> :TagbarToggle<CR>
 " Fzf
 nmap <C-p> :FZF<CR>
 set rtp+=~/.fzf
-
-" lightline
-set laststatus=2
-let g:lightline = {'colorscheme': 'Dracula'}
-" This is regular lightline configuration, we just added 
-" 'linter_warnings', 'linter_errors' and 'linter_ok' to
-" the active right panel. Feel free to move it anywhere.
-" `component_expand' and `component_type' are required.
-"
-" For more info on how this works, see lightline documentation.
-let g:lightline = {
-      \ 'active': {
-      \   'right': [ [ 'lineinfo' ],
-      \              [ 'percent' ],
-      \              [ 'linter_warnings', 'linter_errors', 'linter_ok' ],
-      \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
-      \ },
-      \ 'component_expand': {
-      \   'linter_warnings': 'LightlineLinterWarnings',
-      \   'linter_errors': 'LightlineLinterErrors',
-      \   'linter_ok': 'LightlineLinterOK'
-      \ },
-      \ 'component_type': {
-      \   'linter_warnings': 'warning',
-      \   'linter_errors': 'error',
-      \   'linter_ok': 'ok'
-      \ },
-      \ }
-
-autocmd User ALELint call lightline#update()
-
-" ale + lightline
-function! LightlineLinterWarnings() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '' : printf('%d --', all_non_errors)
-endfunction
-
-function! LightlineLinterErrors() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '' : printf('%d >>', all_errors)
-endfunction
-
-function! LightlineLinterOK() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '✓' : ''
-endfunction
 
 " Git Gutter
 if exists('&signcolumn')  " Vim 7.4.2201
@@ -287,6 +228,11 @@ autocmd BufRead,BufNewFile *.erb set filetype=eruby.html
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
+
+call deoplete#custom#option({
+      \'max_list': 10,
+      \'auto_complete_delay': 20,
+      \})
 " Let <Tab> also do completion
 inoremap <silent><expr> <Tab>
 \ pumvisible() ? "\<C-n>" :
@@ -298,3 +244,28 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 " Markdown
 let g:instant_markdown_slow = 1
 let g:instant_markdown_autostart = 0
+
+" wakatime
+let g:wakatime_PythonBinary = '/usr/local/bin/python'  " (Default: 'python')
+
+" Typescript
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
+hi tsxTagName guifg=#E06C75
+hi tsxCloseString guifg=#F99575
+hi tsxCloseTag guifg=#F99575
+hi tsxAttributeBraces guifg=#F99575
+hi tsxEqual guifg=#F99575
+
+" yellow
+hi tsxAttrib guifg=#F8BD7F cterm=italic
+
+" light-grey
+hi tsxTypeBraces guifg=#999999
+" dark-grey
+hi tsxTypes guifg=#666666
+hi ReactState guifg=#C176A7
+hi ReactProps guifg=#D19A66
+hi Events ctermfg=204 guifg=#56B6C2
+hi ReduxKeywords ctermfg=204 guifg=#C678DD
+hi WebBrowser ctermfg=204 guifg=#56B6C2
+hi ReactLifeCycleMethods ctermfg=204 guifg=#D19A66

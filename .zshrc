@@ -27,7 +27,7 @@ CASE_SENSITIVE="true"
 # DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+export UPDATE_ZSH_DAYS=13
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -59,7 +59,7 @@ CASE_SENSITIVE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git rails rails3 ruby capistrano bundler heroku rake rvm autojump command-not-found python pip github gnu-utils history-substring-search zsh-syntax-highlighting docker-machine zsh-autosuggestions
+  git ruby autojump command-not-foundgithub gnu-utils history-substring-search zsh-syntax-highlighting zsh-autosuggestions wakatime
 )
 autoload -U compinit && compinit
 
@@ -101,7 +101,6 @@ export TERM="xterm-256color"
 # export GOPATH="/home/karir/Code/go"
 export PATH=$PATH:$(go env GOPATH)/bin
 
-eval `dircolors ~/.dir_colors/dircolors`
 RPROMPT="\$(~/.rvm/bin/rvm-prompt s i v g)%{$fg[yellow]%}[%*]"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -110,13 +109,7 @@ RPROMPT="\$(~/.rvm/bin/rvm-prompt s i v g)%{$fg[yellow]%}[%*]"
 
 . $HOME/.asdf/completions/asdf.bash
 
-# db env 
-export DATABASE_HOST="localhost"
-export DATABASE_PORT="5432"
-export DATABASE_USERNAME="postgres"
-export DATABASE_PASSWORD="password"
+prompt_context() {}
 
-# uncomment to activate nvm
-#export NVM_DIR="$HOME/.nvm"
-#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+eval $(thefuck --alias)
