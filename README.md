@@ -25,7 +25,7 @@ rm -rf fonts
 
 after that change font in terminal to any of powerline font
 
-##### Silver Searcher
+## Silver Searcher
 Ag is faster than ack
 
 ```bash
@@ -33,25 +33,25 @@ sudo apt-get install silversearcher-ag # ubuntu
 brew install the_silver_searcher # macos
 ```
 
-#### Deoplete
+## Deoplete
 vim has to support python3
 
 ```bash
 :echo has("python3")
 ```
 
-##### Fuzzy Finder
+## Fuzzy Finder
 ```bash
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 ```
 
-##### Docker Machine Completion
+## Docker Machine Completion
 ```
 git clone https://github.com/leonhartX/docker-machine-zsh-completion.git ~/.oh-my-zsh/custom/plugins/docker-machine
 ```
 
-#### ASDF Version Manager
+## ASDF Version Manager
 ```bash
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.4.1
 ```
