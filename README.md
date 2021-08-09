@@ -2,11 +2,9 @@
 My collection of dot files
 
 ## Tools
-- ubuntu
-- terminator
 - zsh
-- vim
-- tmux ( >= 2.3)
+- nvim
+- kitty
 - rvm + ruby
 
 ## Oh My ZSH
@@ -33,22 +31,10 @@ sudo apt-get install silversearcher-ag # ubuntu
 brew install the_silver_searcher # macos
 ```
 
-## Deoplete
-vim has to support python3
-
-```bash
-:echo has("python3")
-```
-
 ## Fuzzy Finder
 ```bash
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
-```
-
-## Docker Machine Completion
-```
-git clone https://github.com/leonhartX/docker-machine-zsh-completion.git ~/.oh-my-zsh/custom/plugins/docker-machine
 ```
 
 ## ASDF Version Manager
