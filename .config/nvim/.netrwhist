@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='/Users/quipperindonesia/Code/monorepo/qlearn-react'
+let g:netrw_dirhist_3='/Users/quipperindonesia/Code/monorepo/qlearn-react/src/components'
+let g:netrw_dirhist_2='/Users/quipperindonesia/Code/monorepo/qlearn-react/src'
+let g:netrw_dirhist_1='/Users/quipperindonesia/Code/monorepo/qlearn-react'
