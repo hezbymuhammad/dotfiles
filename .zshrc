@@ -1,5 +1,12 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/Library/Python/2.7/bin:$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -7,7 +14,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="agnoster"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -59,7 +66,7 @@ export UPDATE_ZSH_DAYS=13
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git ruby autojump command-not-foundgithub gnu-utils history-substring-search zsh-syntax-highlighting zsh-autosuggestions wakatime
+  gnu-utils history-substring-search zsh-syntax-highlighting zsh-autosuggestions
 )
 autoload -U compinit && compinit
 
@@ -99,9 +106,7 @@ export TERM="xterm-256color"
 
 # golang env
 # export GOPATH="/home/karir/Code/go"
-export PATH=$PATH:$(go env GOPATH)/bin
-
-RPROMPT="\$(~/.rvm/bin/rvm-prompt s i v g)%{$fg[yellow]%}[%*]"
+# export PATH=$PATH:$(go env GOPATH)/bin
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -109,7 +114,14 @@ RPROMPT="\$(~/.rvm/bin/rvm-prompt s i v g)%{$fg[yellow]%}[%*]"
 
 . $HOME/.asdf/completions/asdf.bash
 
-prompt_context() {}
-
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
 
 eval $(thefuck --alias)
+export FZF_DEFAULT_COMMAND='rg --files --follow --hidden'
+
+export HOMEBREW_GITHUB_API_TOKEN=
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+export GPG_TTY=$(tty)
