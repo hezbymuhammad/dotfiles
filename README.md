@@ -6,10 +6,13 @@ My collection of dot files
 ### Dependencies
 
 Download and install fira mono https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/FiraMono.zip
+Download and install github https://cli.github.com
 
 ```zsh
 # gnupg
 brew install gpg
+
+# git
 brew install git
 
 # oh my zsh
@@ -38,11 +41,14 @@ asdf global nodejs latest
 ```
 
 ### Setup
+
+Create access token https://github.com/settings/tokens
+
 ```zsh
 git clone git@github.com:hezbymuhammad/dotfiles.git
 cd dotfiles
-
-# modify github access token
+mkdir ${ZSH_CUSTOM}/plugins/hezbysecret
+echo -e "export HOMEBREW_GITHUB_API_TOKEN=(access token)" >> ${ZSH_CUSTOM}/plugins/hezbysecret/hezbysecret.plugin.zsh
 
 ln -nfs $(pwd)/.zshrc ~/.zshrc
 ln -nfs $(pwd)/.zsh_aliases ~/.zsh_aliases
