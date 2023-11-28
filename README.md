@@ -1,43 +1,49 @@
 # dotfiles
 My collection of dot files
 
-## Tools
-- zsh
-- nvim
-- kitty
-- rvm + ruby
+## Install
 
-## Oh My ZSH
-```bash
-cd
+### Dependencies
+
+Download and install fira mono https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/FiraMono.zip
+
+```zsh
+# gnupg
+brew install gpg
+brew install git
+
+# oh my zsh
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+# pygmentize
+brew install pygments
+
+# plugins
+git clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+# ag for vim
+brew install ag
+
+# fzf
+brew install fzf
+$(brew --prefix)/opt/fzf/install
+
+# asdf vm
+brew install asdf
+asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+asdf install nodejs latest
+asdf global nodejs latest
 ```
 
-## Powerline Font
-```bash
-cd
-git clone https://github.com/powerline/fonts.git --depth=1
-./fonts/install.sh
-rm -rf fonts
-```
+### Setup
+```zsh
+git clone git@github.com:hezbymuhammad/dotfiles.git
+cd dotfiles
 
-after that change font in terminal to any of powerline font
+# modify github access token
 
-## Silver Searcher
-Ag is faster than ack
-
-```bash
-sudo apt-get install silversearcher-ag # ubuntu
-brew install the_silver_searcher # macos
-```
-
-## Fuzzy Finder
-```bash
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install
-```
-
-## ASDF Version Manager
-```bash
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.4.1
+ln -nfs $(pwd)/.zshrc ~/.zshrc
+ln -nfs $(pwd)/.zsh_aliases ~/.zsh_aliases
 ```

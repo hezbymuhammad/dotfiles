@@ -1,16 +1,9 @@
-alias gco='git checkout'
-alias gpr='git pull --rebase'
-alias glg='git log --oneline --graph --decorate'
 alias brewcompleteupgrade='brew update && brew upgrade --cask && brew cleanup && brew doctor'
-alias pcat='pygmentize -f terminal256 -O style=monokai -g'
 alias dockerstopall='docker stop $(docker ps -aq)'
 alias dcr='docker compose run'
 alias dcup='docker compose up'
 alias dcdn='docker compose down'
 alias dcb='docker compose build'
 alias dsp='docker system prune'
-alias f='fuck'
-alias vimvanilla="vim -u ~/.vanilla.vimrc"
-alias ctags="`brew --prefix`/bin/ctags"
 alias indihomefuck="sudo curl https://raw.githubusercontent.com/bebasid/bebasid/master/releases/hosts -o /etc/hosts && sudo killall -HUP mDNSResponder"
 alias indihomeunfuck="sudo cp ~/hosts /etc/hosts && sudo killall -HUP mDNSResponder"
