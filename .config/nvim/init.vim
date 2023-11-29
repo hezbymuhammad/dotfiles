@@ -161,7 +161,7 @@ format_on_save.setup({
     markdown = formatters.prettierd,
     sh = formatters.shfmt,
     terraform = formatters.lsp,
-    typescript = formatters.prettierd,
+    typescript = formatters.lsp,
     yaml = formatters.lsp,
 
     go = {
