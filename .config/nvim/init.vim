@@ -60,7 +60,7 @@ endif
 lua << EOF
 
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "go", "ruby", "javascript", "typescript", "bash", "markdown", "json", "yaml", "terraform" },
+  ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "go", "ruby", "javascript", "typescript", "bash", "markdown", "json", "yaml", "terraform", "sql", "proto" },
 
   sync_install = false,
 
