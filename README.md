@@ -76,4 +76,5 @@ ln -nfs $(pwd)/.zshrc ~/.zshrc
 ln -nfs $(pwd)/.zsh_aliases ~/.zsh_aliases
 ln -nfs $(pwd)/.gitconfig ~/.gitconfig
 ln -nfs $(pwd)/.gitignore ~/.gitignore
+ln -nfs $(pwd)/.tmux.conf ~/.tmux.conf
 ```
