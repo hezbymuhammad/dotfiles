@@ -156,17 +156,38 @@ format_on_save.setup({
   formatter_by_ft = {
     css = formatters.lsp,
     html = formatters.lsp,
-    javascript = formatters.lsp,
     json = formatters.lsp,
     markdown = formatters.prettierd,
     sh = formatters.shfmt,
     terraform = formatters.lsp,
-    typescript = formatters.lsp,
     yaml = formatters.lsp,
+
+    javascript = {
+      formatters.shell({
+        cmd = { "eslint", "--fix", "%" },
+	tempfile = function()
+	  return vim.fn.expand("%") .. '.formatter-temp'
+	end
+      }),
+    },
+
+    typescript = {
+      formatters.shell({
+        cmd = { "eslint", "--fix", "%" },
+	tempfile = function()
+	  return vim.fn.expand("%") .. '.formatter-temp'
+	end
+      }),
+    },
 
     go = {
       formatters.shell({ cmd = { "goimports" } }),
     },
+  },
+
+  fallback_formatter = {
+    formatters.remove_trailing_whitespace,
+    formatters.remove_trailing_newlines,
   },
 
   run_with_sh = false,
