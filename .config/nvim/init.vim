@@ -156,7 +156,6 @@ format_on_save.setup({
   formatter_by_ft = {
     css = formatters.lsp,
     html = formatters.lsp,
-    json = formatters.lsp,
     markdown = formatters.prettierd,
     sh = formatters.shfmt,
     terraform = formatters.lsp,
@@ -178,6 +177,10 @@ format_on_save.setup({
 	  return vim.fn.expand("%") .. '.formatter-temp'
 	end
       }),
+    },
+
+    json = {
+      formatters.shell({ cmd = { "python3", "-m", "json.tool" } }),
     },
 
     go = {
