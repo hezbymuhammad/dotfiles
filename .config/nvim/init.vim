@@ -13,6 +13,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' 
 Plug 'ray-x/aurora'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
+Plug 'windwp/nvim-autopairs'
 
 call plug#end()
 
@@ -58,6 +59,20 @@ endif
 
 lua << EOF
 
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "go", "ruby", "javascript", "typescript", "bash", "markdown", "json", "yaml", "terraform" },
+
+  sync_install = false,
+
+  auto_install = false,
+
+  highlight = {
+    enable = true,
+
+    additional_vim_regex_highlighting = false,
+  },
+}
+
 vim.g.coq_settings = {
   auto_start = 'shut-up',
   clients = {
@@ -87,10 +102,6 @@ lspconfig.golangci_lint_ls.setup { coq.lsp_ensure_capabilities({ on_attach = on_
 lspconfig.denols.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
 lspconfig.eslint.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
 lspconfig.ruby_ls.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
-
-vim.api.nvim_set_hl(0, '@string', {fg='#59E343'})
-vim.api.nvim_set_hl(0, '@field', {fg='#f93393'})
-vim.api.nvim_set_hl(0, '@number', {fg='#e933e3'})
 
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
@@ -152,5 +163,7 @@ format_on_save.setup({
 
   run_with_sh = false,
 })
+
+require("nvim-autopairs").setup {}
 
 EOF
