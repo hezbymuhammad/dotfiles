@@ -1,138 +1,156 @@
 call plug#begin()
 
-Plug 'flrnd/plastic.vim'
-Plug 'scrooloose/nerdtree'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'mhinz/vim-signify'
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'maxmellon/vim-jsx-pretty'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'suan/vim-instant-markdown'
-Plug 'liuchengxu/vista.vim'
-Plug 'machakann/vim-sandwich'
-Plug 'godlygeek/tabular'
-Plug 'jiangmiao/auto-pairs'
-Plug 'mileszs/ack.vim'
-Plug 'chr4/nginx.vim'
-
-" utilities
-Plug 'roxma/vim-tmux-clipboard'
-Plug 'kristijanhusak/vim-carbon-now-sh'
-Plug 'nvim-lualine/lualine.nvim'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'lewis6991/gitsigns.nvim'
-
-" LSP
-Plug 'hrsh7th/nvim-cmp'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'L3MON4D3/LuaSnip'
-Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'elentok/format-on-save.nvim'
+Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
+Plug 'ray-x/aurora'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
 
 call plug#end()
 
-set t_Co=256
-set background=dark
-syntax enable
-filetype plugin on
-filetype indent on
-set nocompatible
-set complete-=i
-colorscheme plastic
-set nu
-set autoindent
-set cindent
-set smartindent
-set expandtab
-set mouse=a
-nnoremap <Leader>o o<Esc>
-nnoremap <Leader>O O<Esc>
-let g:markdown_fenced_languages = ['bash=sh', 'javascript', 'js=javascript', 'json=javascript', 'typescript', 'ts=typescript', 'php', 'html', 'css', 'rust']
+map <C-\> :CHADopen<CR>
 
-" custom key
+set termguicolors            " 24 bit color
+let g:aurora_italic = 1     " italic
+let g:aurora_transparent = 1     " transparent
+let g:aurora_bold = 1     " bold
+let g:aurora_darker = 1     " darker background
+hi Normal guibg=NONE ctermbg=NONE "remove background
+hi String guibg=#339922 ctermbg=NONE "remove background
+
+colorscheme aurora
+
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
 nmap cp :let @+=expand('%')<CR>
-
-" Split more natural
+set nu
 set splitbelow
 set splitright
-
-if isdirectory($HOME . '/.vim/backup') == 0
-  :silent !mkdir -p ~/.vim/backup >/dev/null 2>&1
+if isdirectory($HOME . '/.config/nvim/backup') == 0
+  :silent !mkdir -p ~/.config/nvim/backup >/dev/null 2>&1
 endif
-set backupdir-=.
-set backupdir+=.
-set backupdir-=~/
-set backupdir^=~/.vim/backup/
-set backupdir^=./.vim-backup/
+set backupdir=~/.config/nvim/backup
 set backup
 
-if isdirectory($HOME . '/.vim/swap') == 0
-  :silent !mkdir -p ~/.vim/swap >/dev/null 2>&1
+if isdirectory($HOME . '/.config/nvim/swap') == 0
+  :silent !mkdir -p ~/.config/nvim/swap >/dev/null 2>&1
 endif
-set directory=./.vim-swap//
-set directory+=~/.vim/swap//
-set directory+=~/tmp//
-set directory+=.
+set directory=~/.config/nvim/swap
 
 if exists("+undofile")
-  if isdirectory($HOME . '/.vim/undo') == 0
-    :silent !mkdir -p ~/.vim/undo > /dev/null 2>&1
+  if isdirectory($HOME . '/.config/nvim/undo') == 0
+    :silent !mkdir -p ~/.config/nvim/undo > /dev/null 2>&1
   endif
-  set undodir=./.vim-undo//
-  set undodir+=~/.vim/undo//
+  set undodir=~/.config/nvim/undo
   set undofile
 endif
 
-let g:eleline_powerline_fonts = 1
+lua << EOF
 
-" NERDtree
-map <C-\> :NERDTreeToggle<CR>
+vim.g.coq_settings = {
+  auto_start = 'shut-up',
+  clients = {
+    lsp = {
+      resolve_timeout = 0.02,
+    },
+    tree_sitter = {
+      slow_threshold = 0.025,
+    },
+    buffers = {
+      match_syms = true,
+      same_filetype = true,
+    },
+  },
+  limits = {
+    completion_auto_timeout = 0.05,
+  },
+}
 
-" Fzf
-nmap <C-p> :call fzf#run(fzf#wrap({'source': 'git ls-files --exclude-standard --others --cached'}))<CR>
-set rtp+=~/.fzf
+local lspconfig = require('lspconfig')
+local coq = require("coq")
+local on_attach = function(client, bufnr)
+    require("lsp-format").on_attach(client, bufnr)
+end
+lspconfig.gopls.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
+lspconfig.golangci_lint_ls.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
+lspconfig.denols.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
+lspconfig.eslint.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
+lspconfig.ruby_ls.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
 
-" The Silver Searcher
-if executable('ag')
-    " Use ag over grep
-    set grepprg=ag\ --nogroup\ --nocolor\ --column
-    set grepformat=%f:%l:%c%m
-    let g:ackprg = 'ag --column'
-endif
-" bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-" bind \ (backward slash) to grep shortcut
-"command -nargs=+ -complete=file -bar Ack silent! grep! <args>|cwindow|redraw!
-nnoremap <leader>\ :Ack<SPACE>
+vim.api.nvim_set_hl(0, '@string', {fg='#59E343'})
+vim.api.nvim_set_hl(0, '@field', {fg='#f93393'})
+vim.api.nvim_set_hl(0, '@number', {fg='#e933e3'})
 
-" Markdown
-let g:instant_markdown_slow = 1
-let g:instant_markdown_autostart = 0
+vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 
-" xmlint
-au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
+vim.g.markdown_fenced_languages = {
+  "ts=typescript"
+}
 
-" yaml
-autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+  callback = function(ev)
+    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-" ultisnip
-let g:UltiSnipsExpandTrigger="<c-n>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+    local opts = { buffer = ev.buf }
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
+    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
+    vim.keymap.set('n', '<space>wl', function()
+      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, opts)
+    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
+    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
+    vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+    vim.keymap.set('n', '<space>f', function()
+      vim.lsp.buf.format { async = true }
+    end, opts)
+  end,
+})
 
-lua require('gitsigns-custom')
-lua require('evil_lualine')
+local format_on_save = require("format-on-save")
+local formatters = require("format-on-save.formatters")
 
-" js / TS
-set completeopt=menu,menuone,noselect
-autocmd FileType javascript setlocal shiftwidth=4 tabstop=4
-autocmd FileType typescript setlocal shiftwidth=4 tabstop=4
+format_on_save.setup({
+  exclude_path_patterns = {
+    "/node_modules/",
+  },
+  formatter_by_ft = {
+    css = formatters.lsp,
+    html = formatters.lsp,
+    javascript = formatters.lsp,
+    json = formatters.lsp,
+    markdown = formatters.prettierd,
+    sh = formatters.shfmt,
+    terraform = formatters.lsp,
+    typescript = formatters.prettierd,
+    yaml = formatters.lsp,
 
-" LSP
-lua require('cmp-custom')
-lua require('denols')
+    go = {
+      formatters.shell({ cmd = { "goimports" } }),
+    },
+  },
+
+  run_with_sh = false,
+})
+
+EOF

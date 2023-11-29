@@ -29,6 +29,9 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 # ag for vim
 brew install ag
 
+# ripgrep
+brew install ripgrep
+
 # fzf
 brew install fzf
 $(brew --prefix)/opt/fzf/install
@@ -38,6 +41,18 @@ brew install asdf
 asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 asdf install nodejs latest
 asdf global nodejs latest
+asdf install golang latest
+asdf global golang latest
+asdf install ruby latest
+asdf global ruby latest
+
+# LSP
+go install golang.org/x/tools/cmd/goimports@latest
+go install github.com/nametake/golangci-lint-langserver@latest
+asdf reshim golang
+brew install golangci-lint
+brew install deno
+npm i -g eslint
 ```
 
 ### Setup
