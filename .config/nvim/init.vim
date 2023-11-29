@@ -39,13 +39,13 @@ set nu
 set splitbelow
 set splitright
 if isdirectory($HOME . '/.config/nvim/backup') == 0
-  :silent !mkdir -p ~/.config/nvim/backup >/dev/null 2>&1
+  :silent !mkdir -p ~/.config/nvim/backup > /dev/null 2>&1
 endif
 set backupdir=~/.config/nvim/backup
 set backup
 
 if isdirectory($HOME . '/.config/nvim/swap') == 0
-  :silent !mkdir -p ~/.config/nvim/swap >/dev/null 2>&1
+  :silent !mkdir -p ~/.config/nvim/swap > /dev/null 2>&1
 endif
 set directory=~/.config/nvim/swap
 
