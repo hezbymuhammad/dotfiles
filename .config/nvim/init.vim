@@ -2,8 +2,6 @@ call plug#begin()
 
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'neovim/nvim-lspconfig'
 Plug 'elentok/format-on-save.nvim'
@@ -12,8 +10,11 @@ Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
 Plug 'ray-x/aurora'
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
+Plug 'nvim-telescope/telescope.nvim'
 Plug 'windwp/nvim-autopairs'
+Plug 'lewis6991/gitsigns.nvim'
+Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-fugitive'
 
 call plug#end()
 
@@ -102,6 +103,13 @@ lspconfig.golangci_lint_ls.setup { coq.lsp_ensure_capabilities({ on_attach = on_
 lspconfig.denols.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
 lspconfig.eslint.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
 lspconfig.ruby_ls.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
+lspconfig.yamlls.setup{ coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
+lspconfig.cssls.setup{ coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
+lspconfig.html.setup{ coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
+lspconfig.jsonls.setup{ coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
+lspconfig.marksman.setup{ coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
+lspconfig.terraformls.setup{ coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
+lspconfig.yamlls.setup{ coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
 
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
@@ -165,5 +173,6 @@ format_on_save.setup({
 })
 
 require("nvim-autopairs").setup {}
+require('gitsigns').setup()
 
 EOF

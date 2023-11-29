@@ -1,4 +1,5 @@
 # dotfiles
+
 My collection of dot files
 
 ## Install
@@ -46,13 +47,19 @@ asdf global golang latest
 asdf install ruby latest
 asdf global ruby latest
 
-# LSP
+# LSP & formatter
 go install golang.org/x/tools/cmd/goimports@latest
 go install github.com/nametake/golangci-lint-langserver@latest
+go install mvdan.cc/sh/v3/cmd/shfmt@latest
 asdf reshim golang
+brew install gh
 brew install golangci-lint
 brew install deno
-npm i -g eslint
+brew install fsouza/prettierd/prettierd
+brew install marksman
+brew install hashicorp/tap/terraform-ls
+npm i -g vscode-langservers-extracted
+npm i -g yaml-language-server
 ```
 
 ### Setup
