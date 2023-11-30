@@ -15,6 +15,8 @@ Plug 'windwp/nvim-autopairs'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-fugitive'
+Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'nmac427/guess-indent.nvim'
 
 call plug#end()
 
@@ -198,5 +200,19 @@ format_on_save.setup({
 
 require("nvim-autopairs").setup {}
 require('gitsigns').setup()
+require("ibl").setup()
+require('guess-indent').setup {
+  auto_cmd = true,
+  filetype_exclude = {
+    "netrw",
+    "tutor",
+  },
+  buftype_exclude = {
+    "help",
+    "nofile",
+    "terminal",
+    "prompt",
+  },
+}
 
 EOF
