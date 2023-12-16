@@ -154,6 +154,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 local format_on_save = require("format-on-save")
 local formatters = require("format-on-save.formatters")
+local vim_notify = require("format-on-save.error-notifiers.vim-notify")
 
 format_on_save.setup({
   exclude_path_patterns = {
@@ -168,28 +169,26 @@ format_on_save.setup({
     yaml = formatters.lsp,
 
     javascript = {
-      formatters.shell({
-        cmd = { "eslint", "--fix", "%" },
-	tempfile = function()
-	  return vim.fn.expand("%") .. '.formatter-temp'
-	end
-      }),
+      formatters.remove_trailing_whitespace,
+      formatters.remove_trailing_newlines,
+      formatters.lazy_eslint_d_fix,
     },
 
     typescript = {
-      formatters.shell({
-        cmd = { "eslint", "--fix", "%" },
-	tempfile = function()
-	  return vim.fn.expand("%") .. '.formatter-temp'
-	end
-      }),
+      formatters.remove_trailing_whitespace,
+      formatters.remove_trailing_newlines,
+      formatters.lazy_eslint_d_fix,
     },
 
     json = {
+      formatters.remove_trailing_whitespace,
+      formatters.remove_trailing_newlines,
       formatters.shell({ cmd = { "python3", "-m", "json.tool" } }),
     },
 
     go = {
+      formatters.remove_trailing_whitespace,
+      formatters.remove_trailing_newlines,
       formatters.shell({ cmd = { "goimports" } }),
     },
   },
@@ -199,6 +198,7 @@ format_on_save.setup({
     formatters.remove_trailing_newlines,
   },
 
+  error_notifier = vim_notify,
   run_with_sh = false,
 })
 
