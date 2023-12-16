@@ -58,6 +58,8 @@ brew install deno
 brew install fsouza/prettierd/prettierd
 brew install marksman
 brew install hashicorp/tap/terraform-ls
+brew install gnu-sed
+brew install ripgrep
 npm i -g vscode-langservers-extracted
 npm i -g yaml-language-server
 ```

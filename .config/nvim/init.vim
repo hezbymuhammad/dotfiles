@@ -17,6 +17,7 @@ Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-fugitive'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'nmac427/guess-indent.nvim'
+Plug 'nvim-pack/nvim-spectre'
 
 call plug#end()
 
@@ -39,7 +40,9 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>fs <cmd>Telescope treesitter<cr>
 nnoremap <leader>fd <cmd>Telescope diagnostics<cr>
 nnoremap <leader>gs <cmd>Telescope git_status<cr>
+nnoremap <leader>gc <cmd>Telescope git_commits<cr>
 nnoremap <leader>gbc <cmd>Telescope git_bcommits<cr>
+nnoremap <leader>\ <cmd>Spectre<cr>
 
 nmap cp :let @+=expand('%')<CR>
 set nu
