@@ -178,7 +178,19 @@ format_on_save.setup({
       formatters.lazy_eslint_d_fix,
     },
 
+    javascriptreact = {
+      formatters.remove_trailing_whitespace,
+      formatters.remove_trailing_newlines,
+      formatters.lazy_eslint_d_fix,
+    },
+
     typescript = {
+      formatters.remove_trailing_whitespace,
+      formatters.remove_trailing_newlines,
+      formatters.lazy_eslint_d_fix,
+    },
+
+    typescriptreact = {
       formatters.remove_trailing_whitespace,
       formatters.remove_trailing_newlines,
       formatters.lazy_eslint_d_fix,
