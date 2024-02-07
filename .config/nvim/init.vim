@@ -109,7 +109,7 @@ local on_attach = function(client, bufnr)
 end
 lspconfig.gopls.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
 lspconfig.golangci_lint_ls.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
-lspconfig.denols.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
+lspconfig.tsserver.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
 lspconfig.eslint.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
 lspconfig.ruby_ls.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
 lspconfig.yamlls.setup{ coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
@@ -119,6 +119,7 @@ lspconfig.jsonls.setup{ coq.lsp_ensure_capabilities({ on_attach = on_attach_call
 lspconfig.marksman.setup{ coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
 lspconfig.terraformls.setup{ coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
 lspconfig.yamlls.setup{ coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
+require'lspconfig'.bufls.setup{}
 
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)

@@ -51,6 +51,7 @@ asdf global ruby latest
 go install golang.org/x/tools/cmd/goimports@latest
 go install github.com/nametake/golangci-lint-langserver@latest
 go install mvdan.cc/sh/v3/cmd/shfmt@latest
+go install github.com/bufbuild/buf-language-server/cmd/bufls@latest
 asdf reshim golang
 brew install gh
 brew install golangci-lint
@@ -60,8 +61,12 @@ brew install marksman
 brew install hashicorp/tap/terraform-ls
 brew install gnu-sed
 brew install ripgrep
+
+# need to install all of these in each node version and reshim
 npm i -g vscode-langservers-extracted
 npm i -g yaml-language-server
+npm i -g eslint_d
+npm i -g typescript-language-server
 ```
 
 ### Setup
