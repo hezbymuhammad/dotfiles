@@ -119,6 +119,7 @@ lspconfig.jsonls.setup{ coq.lsp_ensure_capabilities({ on_attach = on_attach_call
 lspconfig.marksman.setup{ coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
 lspconfig.terraformls.setup{ coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
 lspconfig.yamlls.setup{ coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
+lspconfig.bashls.setup{ coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
 require'lspconfig'.bufls.setup{}
 
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
@@ -168,7 +169,8 @@ format_on_save.setup({
     css = formatters.lsp,
     html = formatters.lsp,
     markdown = formatters.prettierd,
-    sh = formatters.shfmt,
+    sh = formatters.lsp,
+    bash = formatters.lsp,
     terraform = formatters.lsp,
     yaml = formatters.lsp,
 
