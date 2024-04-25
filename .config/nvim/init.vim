@@ -18,6 +18,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'nmac427/guess-indent.nvim'
 Plug 'nvim-pack/nvim-spectre'
+Plug 'vinnymeller/swagger-preview.nvim'
 
 call plug#end()
 
@@ -111,7 +112,7 @@ lspconfig.gopls.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach_call
 lspconfig.golangci_lint_ls.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
 lspconfig.tsserver.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
 lspconfig.eslint.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
-lspconfig.ruby_ls.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
+lspconfig.ruby_lsp.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
 lspconfig.yamlls.setup{ coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
 lspconfig.cssls.setup{ coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
 lspconfig.html.setup{ coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
@@ -235,6 +236,10 @@ require('guess-indent').setup {
     "terminal",
     "prompt",
   },
+}
+require("swagger-preview").setup {
+    port = 8123,
+    host = "localhost",
 }
 
 EOF
