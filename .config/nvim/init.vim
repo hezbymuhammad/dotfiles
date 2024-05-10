@@ -18,7 +18,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'nmac427/guess-indent.nvim'
 Plug 'nvim-pack/nvim-spectre'
-Plug 'vinnymeller/swagger-preview.nvim'
 
 call plug#end()
 
@@ -236,10 +235,6 @@ require('guess-indent').setup {
     "terminal",
     "prompt",
   },
-}
-require("swagger-preview").setup {
-    port = 8123,
-    host = "localhost",
 }
 
 EOF
