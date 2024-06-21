@@ -5,7 +5,9 @@ Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'neovim/nvim-lspconfig'
 Plug 'elentok/format-on-save.nvim'
+Plug 'github/copilot.vim'
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
 Plug 'ray-x/aurora'
@@ -235,6 +237,9 @@ require('guess-indent').setup {
     "terminal",
     "prompt",
   },
+}
+require("coq_3p") {
+  { src = "copilot", short_name = "COP", accept_key = "<c-f>" },
 }
 
 EOF
