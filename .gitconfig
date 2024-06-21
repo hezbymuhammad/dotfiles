@@ -10,16 +10,25 @@
   ui = auto
 [merge]
   ff = only
+	tool = meld
 [commit]
   template = ~/.gitmessage
 [fetch]
   prune = true
 [rebase]
   autosquash = true
-[diff]
-  colorMoved = zebra
 [filter "lfs"]
   clean = git-lfs clean -- %f
   smudge = git-lfs smudge -- %f
   process = git-lfs filter-process
   required = true
+[diff]
+  colorMoved = zebra
+[alias]
+  meld = !git difftool -t meld --dir-diff
+[mergetool "meld"]
+  path = /Applications/Meld.app/Contents/MacOS/Meld
+[difftool "meld"]
+  cmd = /Applications/Meld.app/Contents/MacOS/Meld \"$LOCAL\" \"$REMOTE\"
+[difftool]
+	prompt = false

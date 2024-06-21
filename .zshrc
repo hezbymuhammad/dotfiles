@@ -1,5 +1,6 @@
 export ZSH="$HOME/.oh-my-zsh"
 
+FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 ZSH_THEME="robbyrussell"
 plugins=(hezbysecret ag asdf colorize git github gnu-utils zsh-history-substring-search zsh-syntax-highlighting zsh-autosuggestions)
 autoload -U compinit && compinit

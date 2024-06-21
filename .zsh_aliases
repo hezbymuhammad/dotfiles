@@ -8,3 +8,4 @@ alias dsp='docker system prune'
 alias indihomefuck="sudo curl https://raw.githubusercontent.com/bebasid/bebasid/master/releases/hosts -o /etc/hosts && sudo killall -HUP mDNSResponder"
 alias indihomeunfuck="sudo cp ~/hosts /etc/hosts && sudo killall -HUP mDNSResponder"
 alias k='kubectl'
+alias meld='/Applications/Meld.app/Contents/MacOS/Meld'
