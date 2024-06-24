@@ -62,6 +62,7 @@ brew install hashicorp/tap/terraform-ls
 brew install gnu-sed
 brew install ripgrep
 brew install fd
+brew install marksman
 
 # need to install all of these in each node version and reshim
 npm i -g vscode-langservers-extracted
