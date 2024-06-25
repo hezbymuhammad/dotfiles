@@ -9,3 +9,6 @@ alias indihomefuck="sudo curl https://raw.githubusercontent.com/bebasid/bebasid/
 alias indihomeunfuck="sudo cp ~/hosts /etc/hosts && sudo killall -HUP mDNSResponder"
 alias k='kubectl'
 alias meld='/Applications/Meld.app/Contents/MacOS/Meld'
+alias gss='git status --short'
+alias gcam='git commit --all -m'
+alias gaa='git add --all'
