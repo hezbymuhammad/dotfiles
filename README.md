@@ -31,9 +31,18 @@ brew install ripgrep
 # zsh autosuggestion
 brew install zsh-autosuggestions
 
+# zsh syntax highlight
+brew install zsh-syntax-highlighting
+
 # fzf
 brew install fzf
 $(brew --prefix)/opt/fzf/install
+
+# zsh completion
+brew install zsh-completions
+chmod go-w $HOMEBREW_PREFIX/share
+chmod -R go-w $HOMEBREW_PREFIX/share/zsh
+rm -f ~/.zcompdump
 
 # asdf vm
 brew install asdf

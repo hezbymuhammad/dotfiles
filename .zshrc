@@ -8,3 +8,7 @@ export ZSH_COLORIZE_CHROMA_FORMATTER=terminal256
 export ZSH_COLORIZE_STYLE="monokai"
 source $HOME/.zsh_aliases
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+autoload -Uz compinit
+compinit
