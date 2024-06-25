@@ -10,6 +10,9 @@ Download and install fira mono https://github.com/ryanoasis/nerd-fonts/releases/
 Download and install github https://cli.github.com
 
 ```zsh
+# terminal
+brew install kitty
+
 # gnupg
 brew install gpg
 
