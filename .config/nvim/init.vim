@@ -21,6 +21,7 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'nmac427/guess-indent.nvim'
 Plug 'nvim-pack/nvim-spectre'
 Plug 'nvim-lualine/lualine.nvim'
+Plug 'AndreM222/copilot-lualine'
 Plug 'nvim-tree/nvim-web-devicons'
 
 call plug#end()

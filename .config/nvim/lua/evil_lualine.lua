@@ -136,6 +136,8 @@ ins_left { 'location' }
 
 ins_left { 'progress', color = { fg = colors.fg, gui = 'bold' } }
 
+ins_left { 'copilot', show_colors = true, }
+
 ins_left {
   'diagnostics',
   sources = { 'nvim_diagnostic' },
