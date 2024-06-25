@@ -20,6 +20,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'nmac427/guess-indent.nvim'
 Plug 'nvim-pack/nvim-spectre'
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'nvim-tree/nvim-web-devicons'
 
 call plug#end()
 
@@ -50,22 +52,22 @@ nmap cp :let @+=expand('%')<CR>
 set nu
 set splitbelow
 set splitright
-if isdirectory($HOME . '/.config/nvim/backup') == 0
-  :silent !mkdir -p ~/.config/nvim/backup > /dev/null 2>&1
+if isdirectory($HOME . '/.local/nvim/backup') == 0
+  :silent !mkdir -p ~/.local/nvim/backup > /dev/null 2>&1
 endif
-set backupdir=~/.config/nvim/backup
+set backupdir=~/.local/nvim/backup
 set backup
 
-if isdirectory($HOME . '/.config/nvim/swap') == 0
-  :silent !mkdir -p ~/.config/nvim/swap > /dev/null 2>&1
+if isdirectory($HOME . '/.local/nvim/swap') == 0
+  :silent !mkdir -p ~/.local/nvim/swap > /dev/null 2>&1
 endif
-set directory=~/.config/nvim/swap
+set directory=~/.local/nvim/swap
 
 if exists("+undofile")
-  if isdirectory($HOME . '/.config/nvim/undo') == 0
-    :silent !mkdir -p ~/.config/nvim/undo > /dev/null 2>&1
+  if isdirectory($HOME . '/.local/nvim/undo') == 0
+    :silent !mkdir -p ~/.local/nvim/undo > /dev/null 2>&1
   endif
-  set undodir=~/.config/nvim/undo
+  set undodir=~/.local/nvim/undo
   set undofile
 endif
 
@@ -223,7 +225,6 @@ format_on_save.setup({
 })
 
 require("nvim-autopairs").setup {}
-require('gitsigns').setup()
 require("ibl").setup()
 require('guess-indent').setup {
   auto_cmd = true,
@@ -241,5 +242,8 @@ require('guess-indent').setup {
 require("coq_3p") {
   { src = "copilot", short_name = "COP", accept_key = "<c-f>" },
 }
+
+require('evil_lualine')
+require('gitsigns-custom')
 
 EOF

@@ -77,12 +77,16 @@ Create access token https://github.com/settings/tokens
 ```zsh
 git clone git@github.com:hezbymuhammad/dotfiles.git
 cd dotfiles
+mkdir ~/.local/nvim
 mkdir ${ZSH_CUSTOM}/plugins/hezbysecret
 echo -e "export HOMEBREW_GITHUB_API_TOKEN=(access token)" >> ${ZSH_CUSTOM}/plugins/hezbysecret/hezbysecret.plugin.zsh
 
 ln -nfs $(pwd)/.zshrc ~/.zshrc
 ln -nfs $(pwd)/.zsh_aliases ~/.zsh_aliases
+ln -nfs $(pwd)/.config/starship.toml ~/.config/starship.toml
 ln -nfs $(pwd)/.gitconfig ~/.gitconfig
 ln -nfs $(pwd)/.gitignore ~/.gitignore
 ln -nfs $(pwd)/.tmux.conf ~/.tmux.conf
+ln -nfs $(pwd)/.config/starship.toml ~/.config/starship.toml
+ln -nfs $(pwd)/.config/nvim ~/.config/nvim
 ```
