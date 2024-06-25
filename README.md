@@ -28,6 +28,9 @@ brew install ag
 # ripgrep
 brew install ripgrep
 
+# zsh autosuggestion
+brew install zsh-autosuggestions
+
 # fzf
 brew install fzf
 $(brew --prefix)/opt/fzf/install
