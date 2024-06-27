@@ -1,5 +1,6 @@
 eval "$(starship init zsh)"
-export WORDCHARS="*?.[]~=/&;!#$%^(){}<>"
+export WORDCHARS="*?[]~&!#$%^(){}<>"
+. "$HOME/env.sh"
 
 export EDITOR=/opt/homebrew/bin/nvim
 export TERM="tmux-256color"

@@ -19,3 +19,4 @@ tmp/**/*
 .config/nvim/plugged
 .tool-versions
 .npmrc
+env.sh
