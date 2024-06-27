@@ -4,11 +4,15 @@ Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'onsails/lspkind.nvim'
+Plug 'L3MON4D3/LuaSnip', { 'tag': 'v2.3.0', 'do': 'make install_jsregexp'}
+Plug 'zbirenbaum/copilot-cmp'
 Plug 'elentok/format-on-save.nvim'
 Plug 'zbirenbaum/copilot.lua'
-Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
-Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
-Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
 Plug 'ray-x/aurora'
 Plug 'nvim-lua/plenary.nvim'
@@ -88,44 +92,102 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 
-vim.g.coq_settings = {
-  auto_start = 'shut-up',
-  clients = {
-    lsp = {
-      resolve_timeout = 0.02,
-    },
-    tree_sitter = {
-      slow_threshold = 0.025,
-    },
-    buffers = {
-      match_syms = true,
-      same_filetype = true,
-    },
-  },
-  limits = {
-    completion_auto_timeout = 0.05,
-  },
-}
-
 local lspconfig = require('lspconfig')
-local coq = require("coq")
+local luasnip = require("luasnip")
+local cmp = require('cmp')
+local lspkind = require('lspkind')
+local has_words_before = function()
+  if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
+end
+luasnip.setup()
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+    end,
+  },
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
+  },
+  formatting = {
+    format = lspkind.cmp_format({
+      mode = "symbol",
+      max_width = 50,
+      symbol_map = {
+        Copilot = "",
+      }
+    })
+  },
+  mapping = cmp.mapping.preset.insert({
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.abort(),
+    ['<CR>'] = cmp.mapping(function(fallback)
+        if cmp.visible()  and has_words_before() then
+            if luasnip.expandable() then
+                luasnip.expand()
+            else
+                cmp.confirm({
+                    select = true,
+                })
+            end
+        else
+            fallback()
+        end
+    end),
+
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() and has_words_before() then
+        cmp.select_next_item()
+      elseif luasnip.locally_jumpable(1) then
+        luasnip.jump(1)
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() and has_words_before() then
+        cmp.select_prev_item()
+      elseif luasnip.locally_jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+  }),
+  sources = {
+    -- Copilot Source
+    { name = "copilot", group_index = 2 },
+    -- Other Sources
+    { name = "nvim_lsp", group_index = 2 },
+    { name = "path", group_index = 2 },
+    { name = "luasnip", group_index = 2 },
+  },
+})
+
+require("copilot_cmp").setup()
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local on_attach = function(client, bufnr)
     require("lsp-format").on_attach(client, bufnr)
 end
-lspconfig.gopls.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
-lspconfig.golangci_lint_ls.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
-lspconfig.tsserver.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
-lspconfig.eslint.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
-lspconfig.ruby_lsp.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
-lspconfig.yamlls.setup{ coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
-lspconfig.cssls.setup{ coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
-lspconfig.html.setup{ coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
-lspconfig.jsonls.setup{ coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
-lspconfig.marksman.setup{ coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
-lspconfig.terraformls.setup{ coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
-lspconfig.yamlls.setup{ coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
-lspconfig.bashls.setup{ coq.lsp_ensure_capabilities({ on_attach = on_attach_callback }) }
-require'lspconfig'.bufls.setup{}
+lspconfig.gopls.setup { capabilities = capabilities }
+lspconfig.golangci_lint_ls.setup { capabilities = capabilities }
+lspconfig.tsserver.setup { capabilities = capabilities }
+lspconfig.eslint.setup { capabilities = capabilities }
+lspconfig.ruby_lsp.setup { capabilities = capabilities }
+lspconfig.yamlls.setup { capabilities = capabilities }
+lspconfig.cssls.setup { capabilities = capabilities }
+lspconfig.html.setup { capabilities = capabilities }
+lspconfig.jsonls.setup { capabilities = capabilities }
+lspconfig.marksman.setup { capabilities = capabilities }
+lspconfig.terraformls.setup { capabilities = capabilities }
+lspconfig.yamlls.setup { capabilities = capabilities }
+lspconfig.bashls.setup { capabilities = capabilities }
 
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
@@ -240,10 +302,10 @@ require('guess-indent').setup {
     "prompt",
   },
 }
-require("copilot").setup({})
-require("coq_3p") {
-  { src = "copilot", short_name = "COP", accept_key = "<c-f>" },
-}
+require("copilot").setup({
+  suggestion = { enabled = false },
+  panel = { enabled = false },
+})
 
 require('evil_lualine')
 require('gitsigns-custom')
