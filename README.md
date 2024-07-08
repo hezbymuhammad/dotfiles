@@ -56,6 +56,8 @@ asdf install golang latest
 asdf global golang latest
 asdf install ruby latest
 asdf global ruby latest
+asdf install python latest
+asdf global python latest
 
 # LSP & formatter
 go install golang.org/x/tools/cmd/goimports@latest
@@ -73,6 +75,7 @@ brew install gnu-sed
 brew install ripgrep
 brew install fd
 brew install marksman
+pip install setuptools
 
 # need to install all of these in each node version and reshim
 npm i -g vscode-langservers-extracted
