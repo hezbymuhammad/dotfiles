@@ -20,3 +20,4 @@ tmp/**/*
 .tool-versions
 .npmrc
 env.sh
+bun.lockb
