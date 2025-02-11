@@ -13,6 +13,9 @@ Download and install github https://cli.github.com
 # terminal
 brew install kitty
 
+# nvim
+brew install nvim
+
 # gnupg
 brew install gpg
 
@@ -41,8 +44,12 @@ brew install zsh-syntax-highlighting
 brew install fzf
 $(brew --prefix)/opt/fzf/install
 
+# lib yaml
+brew install libyaml
+
 # zsh completion
 brew install zsh-completions
+chmod go-w /usr/local/share
 chmod go-w $HOMEBREW_PREFIX/share
 chmod -R go-w $HOMEBREW_PREFIX/share/zsh
 rm -f ~/.zcompdump
@@ -54,6 +61,7 @@ asdf install nodejs latest
 asdf global nodejs latest
 asdf install golang latest
 asdf global golang latest
+asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git
 asdf install ruby latest
 asdf global ruby latest
 asdf install python latest
@@ -89,6 +97,8 @@ npm i -g bash-language-server
 
 Create access token https://github.com/settings/tokens, then update `env.sh`
 
+Before create symlink, ensure no existing dir
+
 ```zsh
 git clone git@github.com:hezbymuhammad/dotfiles.git
 cd dotfiles
@@ -101,6 +111,6 @@ ln -nfs $(pwd)/.config/starship.toml ~/.config/starship.toml
 ln -nfs $(pwd)/.gitconfig ~/.gitconfig
 ln -nfs $(pwd)/.gitignore ~/.gitignore
 ln -nfs $(pwd)/.tmux.conf ~/.tmux.conf
-ln -nfs $(pwd)/.config/starship.toml ~/.config/starship.toml
 ln -nfs $(pwd)/.config/nvim ~/.config/nvim
+ln -nfs $(pwd)/.config/kitty ~/.config/kitty
 ```

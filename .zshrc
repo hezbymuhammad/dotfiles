@@ -2,7 +2,7 @@ eval "$(starship init zsh)"
 export WORDCHARS="*?[]~&!#$%^(){}<>"
 . "$HOME/env.sh"
 
-export EDITOR=/opt/homebrew/bin/nvim
+export EDITOR=/usr/local/bin/nvim
 export TERM="tmux-256color"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export PATH="$HOME/.docker/bin:$HOME/.asdf/bin:$HOME/.asdf/shims:$PATH"
