@@ -87,6 +87,7 @@ npm i -g yaml-language-server
 npm i -g eslint_d
 npm i -g typescript-language-server
 npm i -g bash-language-server
+npm i -g typescript
 ```
 
 ### Setup
