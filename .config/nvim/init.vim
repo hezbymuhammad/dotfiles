@@ -1,8 +1,8 @@
 call plug#begin()
 
 Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'preservim/nerdtree'
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
@@ -30,7 +30,7 @@ Plug 'nvim-tree/nvim-web-devicons'
 
 call plug#end()
 
-map <C-\> :CHADopen<CR>
+nnoremap <silent> <expr> <C-\> g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : bufexists(expand('%')) ? "\:NERDTreeFind<CR>" : "\:NERDTree<CR>"
 
 set termguicolors            " 24 bit color
 let g:aurora_italic = 1     " italic
@@ -178,7 +178,7 @@ local on_attach = function(client, bufnr)
 end
 lspconfig.gopls.setup { capabilities = capabilities }
 lspconfig.golangci_lint_ls.setup { capabilities = capabilities }
-lspconfig.tsserver.setup { capabilities = capabilities }
+lspconfig.ts_ls.setup { capabilities = capabilities }
 lspconfig.eslint.setup { capabilities = capabilities }
 lspconfig.ruby_lsp.setup { capabilities = capabilities }
 lspconfig.yamlls.setup { capabilities = capabilities }

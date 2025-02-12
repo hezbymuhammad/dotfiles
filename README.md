@@ -44,9 +44,6 @@ brew install zsh-syntax-highlighting
 brew install fzf
 $(brew --prefix)/opt/fzf/install
 
-# lib yaml
-brew install libyaml
-
 # zsh completion
 brew install zsh-completions
 chmod go-w /usr/local/share
@@ -83,7 +80,6 @@ brew install gnu-sed
 brew install ripgrep
 brew install fd
 brew install marksman
-pip install setuptools
 
 # need to install all of these in each node version and reshim
 npm i -g vscode-langservers-extracted
