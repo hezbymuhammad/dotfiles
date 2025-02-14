@@ -2,6 +2,10 @@ eval "$(starship init zsh)"
 export WORDCHARS="*?[]~&!#$%^(){}<>"
 . "$HOME/env.sh"
 
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=1000
+setopt SHARE_HISTORY
 export EDITOR=/usr/local/bin/nvim
 export TERM="tmux-256color"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
