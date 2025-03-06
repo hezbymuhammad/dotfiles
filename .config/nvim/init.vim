@@ -181,6 +181,7 @@ lspconfig.golangci_lint_ls.setup { capabilities = capabilities }
 lspconfig.ts_ls.setup { capabilities = capabilities }
 lspconfig.eslint.setup { capabilities = capabilities }
 lspconfig.ruby_lsp.setup { capabilities = capabilities }
+lspconfig.rubocop.setup { capabilities = capabilities }
 lspconfig.yamlls.setup { capabilities = capabilities }
 lspconfig.cssls.setup { capabilities = capabilities }
 lspconfig.html.setup { capabilities = capabilities }
@@ -241,6 +242,12 @@ format_on_save.setup({
     bash = formatters.lsp,
     terraform = formatters.lsp,
     yaml = formatters.lsp,
+
+    ruby = {
+      formatters.remove_trailing_whitespace,
+      formatters.remove_trailing_newlines,
+      formatters.lsp,
+    },
 
     javascript = {
       formatters.remove_trailing_whitespace,

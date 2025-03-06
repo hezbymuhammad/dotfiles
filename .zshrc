@@ -9,7 +9,7 @@ setopt SHARE_HISTORY
 export EDITOR=/usr/local/bin/nvim
 export TERM="tmux-256color"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export PATH="$HOME/.docker/bin:$HOME/.asdf/bin:$HOME/.asdf/shims:$PATH"
+export PATH="/usr/local/opt/libpq/bin:$HOME/.docker/bin:$HOME/.asdf/bin:$HOME/.asdf/shims:$PATH"
 export FZF_DEFAULT_COMMAND='rg --files --hidden'
 export ZSH_COLORIZE_CHROMA_FORMATTER=terminal256
 export ZSH_COLORIZE_STYLE="monokai"
