@@ -5,6 +5,12 @@ export WORDCHARS="*?[]~&!#$%^(){}<>"
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=1000
+bindkey '^[^?' backward-kill-word
+bindkey "^[b" backward-word
+bindkey "^[f" forward-word
+bindkey "^A" beginning-of-line
+bindkey "^E" end-of-line
+
 setopt SHARE_HISTORY
 export EDITOR=/usr/local/bin/nvim
 export TERM="tmux-256color"
