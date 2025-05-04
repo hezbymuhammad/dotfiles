@@ -44,6 +44,12 @@ brew install zsh-syntax-highlighting
 brew install fzf
 $(brew --prefix)/opt/fzf/install
 
+# tree better ls
+brew install tree
+
+# bat better cat
+brew install bat
+
 # zsh completion
 brew install zsh-completions
 chmod go-w /usr/local/share
