@@ -26,6 +26,7 @@
   colorMoved = zebra
 [alias]
   meld = !git difftool -t meld --dir-diff
+  bb = !better-git-branch.sh
 [mergetool "meld"]
   path = /Applications/Meld.app/Contents/MacOS/Meld
 [difftool "meld"]

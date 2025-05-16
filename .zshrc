@@ -10,7 +10,7 @@ bindkey "^[b" backward-word
 bindkey "^[f" forward-word
 bindkey "^A" beginning-of-line
 bindkey "^E" end-of-line
-export PATH="/usr/local/opt/libpq/bin:$HOME/.docker/bin:$HOME/.asdf/bin:$HOME/.asdf/shims:$PATH"
+export PATH="$HOME/bin:/usr/local/opt/libpq/bin:$HOME/.docker/bin:$HOME/.asdf/bin:$HOME/.asdf/shims:$PATH"
 
 setopt SHARE_HISTORY
 export EDITOR=/usr/local/bin/nvim
