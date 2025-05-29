@@ -90,7 +90,6 @@ brew install bitwarden-cli
 gem install -g ruby-lsp
 
 # need to install all of these in each node version and reshim
-npm i -g vscode-langservers-extracted
 npm i -g yaml-language-server
 npm i -g eslint_d
 npm i -g typescript-language-server
