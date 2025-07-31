@@ -21,3 +21,4 @@ tmp/**/*
 .npmrc
 env.sh
 bun.lockb
+.obsidian-project
