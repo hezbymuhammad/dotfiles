@@ -24,4 +24,5 @@ source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
 autoload -Uz compinit
+export TERM=screen-256color
 compinit
