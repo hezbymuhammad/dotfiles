@@ -69,6 +69,8 @@ asdf install ruby latest
 asdf global ruby latest
 asdf install python latest
 asdf global python latest
+asdf install rust nightly
+asdf global rust nightly
 
 # LSP & formatter
 go install golang.org/x/tools/cmd/goimports@latest
@@ -79,7 +81,6 @@ asdf reshim golang
 brew install gh
 brew install golangci-lint
 brew install deno
-brew install fsouza/prettierd/prettierd
 brew install marksman
 brew install hashicorp/tap/terraform-ls
 brew install gnu-sed
@@ -87,7 +88,18 @@ brew install ripgrep
 brew install fd
 brew install marksman
 brew install bitwarden-cli
+brew install prettierd
+brew install jq
+brew install tree-sitter
+brew install tree-sitter-cli
+brew install stylua
+brew install lua-language-server
 gem install -g ruby-lsp
+brew install uv
+uv tool install mcp-server-fetch
+uv tool install mcp-server-qdrant
+uv tool install "vectorcode[legacy]" # for intel mbp
+uv tool install vectorcode
 
 # need to install all of these in each node version and reshim
 npm i -g yaml-language-server
@@ -95,6 +107,10 @@ npm i -g eslint_d
 npm i -g typescript-language-server
 npm i -g bash-language-server
 npm i -g typescript
+npm i -g vscode-langservers-extracted
+npm i -g @upstash/context7-mcp
+npm i -g @modelcontextprotocol/server-sequential-thinking
+npm i -g mcp-hub@latest
 ```
 
 ### Setup
@@ -118,4 +134,8 @@ ln -nfs $(pwd)/.gitignore ~/.gitignore
 ln -nfs $(pwd)/.tmux.conf ~/.tmux.conf
 ln -nfs $(pwd)/.config/nvim ~/.config/nvim
 ln -nfs $(pwd)/.config/kitty ~/.config/kitty
+ln -nfs $(pwd)/.config/mcphub ~/.config/mcphub
+ln -nfs $(pwd)/.config/vectorcode ~/.config/vectorcode
 ```
+
+\*use vectorcode reranker Qwen/Qwen3-Embedding-0.6B for vector code for apple arm

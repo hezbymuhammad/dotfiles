@@ -1,0 +1,5 @@
+{
+  "reranker_params": {
+    "model_name_or_path": "cross-encoder/ms-marco-TinyBERT-L2-v2"
+  }
+}

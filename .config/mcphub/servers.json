@@ -1,0 +1,73 @@
+{
+  "mcpServers": {
+    "Context7": {
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ],
+      "command": "npx",
+      "env": {
+        "DEFAULT_MINIMUM_TOKENS": "5000"
+      }
+    },
+    "basic-memory": {
+      "args": [
+        "basic-memory",
+        "mcp"
+      ],
+      "command": "uvx"
+    },
+    "fetch": {
+      "args": [
+        "mcp-server-fetch"
+      ],
+      "command": "uvx"
+    },
+    "qdrant": {
+      "args": [
+        "mcp-server-qdrant"
+      ],
+      "autoApprove": [
+        "qdrant-find",
+        "qdrant-store"
+      ],
+      "command": "uvx",
+      "disabled": false,
+      "env": {
+        "COLLECTION_NAME": "${PWD}",
+        "EMBEDDING_MODEL": "sentence-transformers/all-MiniLM-L6-v2",
+        "QDRANT_LOCAL_PATH": "${HOME}/.local/share/mcp-hub"
+      }
+    },
+    "sequential-thinking": {
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ],
+      "autoApprove": [
+        "sequentialthinking"
+      ],
+      "command": "npx",
+      "custom_instructions": {
+        "text": "- Before start building sequencial steps, you must know user true intent\n- Think carefully to know user intent. This step is important\n- Verify to user about intent\n- Only after you truly know user intent, you can start building sequential steps\n- Add user intent as the final sequence"
+      },
+      "disabled": false
+    }
+  },
+  "nativeMCPServers": {
+    "neovim": {
+      "autoApprove": [
+        "execute_lua",
+        "execute_command",
+        "read_file",
+        "move_item",
+        "read_multiple_files",
+        "delete_items",
+        "find_files",
+        "list_directory",
+        "write_file",
+        "edit_file"
+      ]
+    }
+  }
+}
