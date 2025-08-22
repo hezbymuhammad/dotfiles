@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "Context7": {
+    "context7": {
       "args": [
         "-y",
         "@upstash/context7-mcp"
@@ -22,22 +22,6 @@
         "mcp-server-fetch"
       ],
       "command": "uvx"
-    },
-    "qdrant": {
-      "args": [
-        "mcp-server-qdrant"
-      ],
-      "autoApprove": [
-        "qdrant-find",
-        "qdrant-store"
-      ],
-      "command": "uvx",
-      "disabled": false,
-      "env": {
-        "COLLECTION_NAME": "${PWD}",
-        "EMBEDDING_MODEL": "sentence-transformers/all-MiniLM-L6-v2",
-        "QDRANT_LOCAL_PATH": "${HOME}/.local/share/mcp-hub"
-      }
     },
     "sequential-thinking": {
       "args": [
