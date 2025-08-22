@@ -58,7 +58,7 @@ return {
 			provider = "gemini",
 			request_timeout = 1,
 			throttle = 1000,
-			debounce = 300,
+			debounce = 700,
 			n_completions = 2,
 			provider_options = {
 				gemini = gemini,
