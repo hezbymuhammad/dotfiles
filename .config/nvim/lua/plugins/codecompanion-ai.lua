@@ -18,6 +18,48 @@ return {
 				},
 				inline = {
 					adapter = "gemini",
+					variables = {
+						["vectorcode"] = {
+							---@return string
+							callback = function()
+								local rag_context = ""
+
+								local has_vc, vectorcode_config = pcall(require, "vectorcode.config")
+								local vectorcode_cacher = nil
+								if has_vc then
+									vectorcode_cacher = vectorcode_config.get_cacher_backend()
+								end
+
+								-- roughly equate to 2000 tokens for LLM
+								local RAG_Context_Window_Size = 8000
+
+								if has_vc and vectorcode_cacher ~= nil then
+									local cache_result = vectorcode_cacher.query_from_cache(0)
+									for _, file in ipairs(cache_result) do
+										rag_context = rag_context
+											.. "<file_separator>"
+											.. file.path
+											.. "\n"
+											.. file.document
+									end
+								end
+
+								rag_context = vim.fn.strcharpart(rag_context, 0, RAG_Context_Window_Size)
+								if rag_context ~= "" then
+									rag_context = "To help you assist with my user prompt, I'm attaching the contents of a repo context:\n"
+										.. "<repo_context>\n"
+										.. rag_context
+										.. "\n</repo_context>"
+								end
+
+								return rag_context
+							end,
+							description = "Use vectorcode",
+							opts = {
+								contains_code = true,
+							},
+						},
+					},
 				},
 				cmd = {
 					adapter = "gemini",
@@ -52,8 +94,6 @@ return {
 			},
 			opts = {
 				system_prompt = function()
-					-- TODO: update available tools when adding new MCP
-					-- TODO: replace qdrant with vectorcode
 					return string.format([[
 You are an AI programming assistant named "CodeCompanion". You are currently plugged into the Neovim text editor on a user's machine. You have experience as staff engineer with over 15 years of experience. You are friendly, helpful and keen to share your knowledge. You are also diligent in following instructions. You do not do anything unless asked.
 
