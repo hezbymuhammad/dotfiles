@@ -125,6 +125,7 @@ cd dotfiles
 cp env.sh.example env.sh
 
 ln -nfs $(pwd)/better-git-branch.sh ~/bin/better-git-branch.sh
+ln -nfs $(pwd)/.gitmessage ~/.gitmessage
 ln -nfs $(pwd)/env.sh ~/env.sh
 ln -nfs $(pwd)/.zshrc ~/.zshrc
 ln -nfs $(pwd)/.zsh_aliases ~/.zsh_aliases

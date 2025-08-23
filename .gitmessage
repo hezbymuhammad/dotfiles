@@ -1,0 +1,19 @@
+
+# Commit message guidelines:
+#
+# 1. Subject line: 50 characters max, imperative mood
+# 2. Body: Wrap at 72 characters, explain the 'why' and 'what'
+# 3. Footer: Issue tracker references, breaking changes
+#
+# Example:
+#
+# Fix: Correct handling of edge case in foo module
+#
+# This commit fixes a bug in the foo module that caused incorrect
+# behavior when processing edge cases. The issue was identified during
+# the integration testing phase. The fix involves updating the input
+# validation logic to properly handle these cases.
+#
+# Resolves: #123
+# Breaks: API change in foo module
+

@@ -10,7 +10,6 @@
   ui = auto
 [merge]
   ff = only
-	tool = meld
 [commit]
   template = ~/.gitmessage
 [fetch]
@@ -25,11 +24,4 @@
 [diff]
   colorMoved = zebra
 [alias]
-  meld = !git difftool -t meld --dir-diff
   bb = !better-git-branch.sh
-[mergetool "meld"]
-  path = /Applications/Meld.app/Contents/MacOS/Meld
-[difftool "meld"]
-  cmd = /Applications/Meld.app/Contents/MacOS/Meld \"$LOCAL\" \"$REMOTE\"
-[difftool]
-	prompt = false
