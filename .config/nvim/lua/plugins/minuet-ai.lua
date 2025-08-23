@@ -17,7 +17,13 @@ return {
 			model = "gemini-2.0-flash",
 			optional = {
 				generationConfig = {
+					stopSequences = {
+						"\n",
+						"|endoftext|",
+						"|im_end|",
+					},
 					maxOutputTokens = 256,
+					topP = 0.8,
 					thinkingConfig = {
 						thinkingBudget = 0,
 					},
