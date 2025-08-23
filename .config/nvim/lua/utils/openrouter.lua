@@ -435,7 +435,7 @@ return {
       mapping = "parameters",
       type = "integer",
       optional = true,
-      default = nil,
+      default = 50000,
       desc = "The maximum number of tokens to generate in the chat completion. The total length of input tokens and generated tokens is limited by the model's context length.",
       validate = function(n)
         return n > 0, "Must be greater than 0"
