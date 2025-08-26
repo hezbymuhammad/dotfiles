@@ -6,3 +6,15 @@ profile = "gpt-5-high"
 model = "gpt-5"
 model_reasoning_effort = "high"
 model_reasoning_summary = "detailed"
+
+[mcp_servers.context7]
+command = "npx"
+args = ["-y", "@upstash/context7-mcp"]
+
+[mcp_servers.fetch]
+command = "uvx"
+args = ["mcp-server-fetch"]
+
+[mcp_servers.basic-memory]
+command = "uvx"
+args = ["basic-memory", "mcp"]

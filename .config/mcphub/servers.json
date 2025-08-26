@@ -26,20 +26,6 @@
         "mcp-server-fetch"
       ],
       "command": "uvx"
-    },
-    "sequential-thinking": {
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-sequential-thinking"
-      ],
-      "autoApprove": [
-        "sequentialthinking"
-      ],
-      "command": "npx",
-      "custom_instructions": {
-        "text": "- Before start building sequencial steps, you must know user true intent\n- Think carefully to know user intent. This step is important\n- Verify to user about intent\n- Only after you truly know user intent, you can start building sequential steps\n- Add user intent as the final sequence"
-      },
-      "disabled": false
     }
   },
   "nativeMCPServers": {
