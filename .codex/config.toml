@@ -1,0 +1,8 @@
+preferred_auth_method = "chatgpt"
+
+profile = "gpt-5-high"
+
+[profiles.gpt-5-high]
+model = "gpt-5"
+model_reasoning_effort = "high"
+model_reasoning_summary = "detailed"

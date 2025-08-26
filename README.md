@@ -95,8 +95,9 @@ brew install tree-sitter
 brew install tree-sitter-cli
 brew install stylua
 brew install lua-language-server
-gem install -g ruby-lsp
 brew install uv
+brew install codex
+gem install -g ruby-lsp
 uv tool install mcp-server-fetch
 uv tool install mcp-server-qdrant
 uv tool install "vectorcode[legacy]" # for intel mbp
@@ -138,6 +139,8 @@ ln -nfs $(pwd)/.config/nvim ~/.config/nvim
 ln -nfs $(pwd)/.config/kitty ~/.config/kitty
 ln -nfs $(pwd)/.config/mcphub ~/.config/mcphub
 ln -nfs $(pwd)/.config/vectorcode ~/.config/vectorcode
+ln -nfs $(pwd)/.codex/config.toml ~/.codex/config.toml
+ln -nfs $(pwd)/.codex/AGENTS.md ~/.codex/AGENTS.md
 ```
 
 \*use vectorcode reranker Qwen/Qwen3-Embedding-0.6B for vector code for apple arm
