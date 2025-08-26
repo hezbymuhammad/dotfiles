@@ -79,6 +79,7 @@ go install mvdan.cc/sh/v3/cmd/shfmt@latest
 go install github.com/bufbuild/buf-language-server/cmd/bufls@latest
 asdf reshim golang
 brew install gping
+brew install gitui
 brew install gh
 brew install golangci-lint
 brew install deno
@@ -137,6 +138,7 @@ ln -nfs $(pwd)/.gitignore ~/.gitignore
 ln -nfs $(pwd)/.tmux.conf ~/.tmux.conf
 ln -nfs $(pwd)/.config/nvim ~/.config/nvim
 ln -nfs $(pwd)/.config/kitty ~/.config/kitty
+ln -nfs $(pwd)/.config/gitui ~/.config/gitui
 ln -nfs $(pwd)/.config/mcphub ~/.config/mcphub
 ln -nfs $(pwd)/.config/vectorcode ~/.config/vectorcode
 ln -nfs $(pwd)/.codex/config.toml ~/.codex/config.toml
