@@ -100,7 +100,7 @@ brew install uv
 brew install codex
 gem install -g ruby-lsp
 uv tool install mcp-server-fetch
-uv tool install mcp-server-qdrant
+uv tool install basic-memory
 uv tool install "vectorcode[legacy]" # for intel mbp
 uv tool install vectorcode
 
@@ -143,6 +143,7 @@ ln -nfs $(pwd)/.config/mcphub ~/.config/mcphub
 ln -nfs $(pwd)/.config/vectorcode ~/.config/vectorcode
 ln -nfs $(pwd)/.codex/config.toml ~/.codex/config.toml
 ln -nfs $(pwd)/.codex/AGENTS.md ~/.codex/AGENTS.md
+ln -nfs $(pwd)/.basic-memory/config.json ~/.basic-memory/config.json
 ```
 
 \*use vectorcode reranker Qwen/Qwen3-Embedding-0.6B for vector code for apple arm

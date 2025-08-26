@@ -1,0 +1,12 @@
+{
+  "env": "test",
+  "projects": {
+    "main": "/Users/hezbymuhammad/basic-memory"
+  },
+  "default_project": "main",
+  "log_level": "INFO",
+  "sync_delay": 1000,
+  "update_permalinks_on_move": false,
+  "sync_changes": true,
+  "api_url": null
+}
