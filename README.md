@@ -78,6 +78,7 @@ go install github.com/nametake/golangci-lint-langserver@latest
 go install mvdan.cc/sh/v3/cmd/shfmt@latest
 go install github.com/bufbuild/buf-language-server/cmd/bufls@latest
 asdf reshim golang
+brew install gping
 brew install gh
 brew install golangci-lint
 brew install deno
