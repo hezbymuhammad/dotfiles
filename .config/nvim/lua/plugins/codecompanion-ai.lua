@@ -234,8 +234,8 @@ Coding Principles:
 						chat_filter = nil,
 						auto_generate_title = true,
 						title_generation_opts = {
-							adapter = nil,
-							model = nil,
+							adapter = "gemini",
+							model = "gemini-2.0-flash",
 							refresh_every_n_prompts = 0,
 							max_refreshes = 3,
 						},
@@ -245,6 +245,8 @@ Coding Principles:
 						enable_logging = false,
 						summary = {
 							generation_opts = {
+								adapter = "gemini",
+								model = "gemini-2.0-flash",
 								include_references = true,
 								include_tool_outputs = false,
 							},
@@ -252,9 +254,10 @@ Coding Principles:
 					},
 				},
 				vectorcode = {
+					enabled = false,
 					opts = {
 						tool_group = {
-							enabled = true,
+							enabled = false,
 							extras = {},
 							collapse = false,
 						},
@@ -271,7 +274,7 @@ Coding Principles:
 								chunk_mode = false,
 								summarise = {
 									enabled = true,
-									adapter = "openrouter_gpt_oss",
+									adapter = "openrouter",
 									query_augmented = true,
 								},
 							},

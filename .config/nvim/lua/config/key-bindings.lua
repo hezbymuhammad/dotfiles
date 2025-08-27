@@ -43,7 +43,14 @@ vim.keymap.set(
 	{ "n", "v" },
 	"<leader>ch",
 	"<cmd>CodeCompanionHistory<cr>",
-	{ noremap = true, silent = true, desc = "Toggle code codecompanion history" }
+	{ noremap = true, silent = true, desc = "Toggle code codecompanion history list" }
+)
+
+vim.keymap.set(
+	{ "n", "v" },
+	"<leader>cs",
+	"<cmd>CodeCompanionSummaries<cr>",
+	{ noremap = true, silent = true, desc = "Toggle code codecompanion summary list" }
 )
 
 vim.keymap.set("n", "cp", function()
