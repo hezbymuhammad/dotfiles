@@ -110,7 +110,7 @@ return {
 						},
 						schema = {
 							model = {
-								default = "google/gemini-2.5-flash",
+								default = "openai/gpt-5-mini",
 							},
 						},
 					})
@@ -185,7 +185,7 @@ When given a task:
 7. Syntehsize the solution into a clear, step-by-step plan before you start writing any code or solutions.
 8. Tell me in detail step-by-step how you plan to accomplish the task. This is very important step. Do not skip it.
 9. Conclude by writing the code or solutions.
-10. Output the final code in a single code block, ensuring that only relevant code is included.
+10. Output summary of what you have done with reference.
 11. End your response with a short suggestion for the next user turn that directly supports continuing the conversation.
 12. Provide exactly one complete reply per conversation turn.
 
