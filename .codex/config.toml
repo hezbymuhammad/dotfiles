@@ -18,3 +18,7 @@ args = ["mcp-server-fetch"]
 [mcp_servers.basic-memory]
 command = "uvx"
 args = ["basic-memory", "mcp"]
+
+[mcp_servers.vectorcode]
+command = "vectorcode-mcp-server"
+args = ["--ls-on-start"]

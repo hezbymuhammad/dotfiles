@@ -101,8 +101,8 @@ brew install codex
 gem install -g ruby-lsp
 uv tool install mcp-server-fetch
 uv tool install basic-memory
-uv tool install "vectorcode[legacy]" # for intel mbp
-uv tool install vectorcode
+uv tool install "vectorcode[legacy,mcp]" # for intel mbp
+uv tool install "vectorcode[mcp]"
 
 # need to install all of these in each node version and reshim
 npm i -g yaml-language-server

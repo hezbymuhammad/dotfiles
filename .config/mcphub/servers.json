@@ -26,6 +26,14 @@
         "mcp-server-fetch"
       ],
       "command": "uvx"
+    },
+    "vectorcode": {
+      "args": [
+        "--ls-on-start",
+        "--number",
+        "2"
+      ],
+      "command": "vectorcode-mcp-server"
     }
   },
   "nativeMCPServers": {
