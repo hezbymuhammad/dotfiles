@@ -1,12 +1,13 @@
 local log = require("codecompanion.utils.log")
 local utils = require("codecompanion.utils.adapters")
-local openai = require("codecompanion.adapters.openai")
+local openai = require("codecompanion.adapters.http.openai")
 
 local MODEL_CHOICES = {
 	["openai/gpt-5-mini"] = {
 		opts = {
 			can_reason = true,
 			has_vision = false,
+			params = {},
 		},
 	},
 	["openai/gpt-5"] = {
@@ -14,6 +15,7 @@ local MODEL_CHOICES = {
 			can_reason = true,
 			reasoning_effort = "high",
 			has_vision = false,
+			params = {},
 		},
 	},
 	["openai/gpt-oss-120b"] = {
@@ -21,41 +23,62 @@ local MODEL_CHOICES = {
 			can_reason = true,
 			reasoning_effort = "high",
 			has_vision = false,
+			params = {
+				frequency_penalty = -0.1,
+				presence_penalty = -0.1,
+				temperature = 0.8,
+			},
 		},
 	},
 	["moonshotai/kimi-k2"] = {
 		opts = {
 			can_reason = false,
-			has_vision = true,
+			has_vision = false,
+			params = {
+				frequency_penalty = -0.1,
+				top_p = 0.7,
+			},
 		},
 	},
 	["z-ai/glm-4.5"] = {
 		opts = {
 			can_reason = true,
 			has_vision = false,
+			params = {
+				frequency_penalty = -0.1,
+				top_p = 0.7,
+			},
 		},
 	},
 	["anthropic/claude-sonnet-4"] = {
 		opts = {
 			can_reason = true,
-			has_vision = true,
+			has_vision = false,
+			params = {
+				temperature = 0.8,
+			},
 		},
 	},
 	["google/gemini-2.5-flash"] = {
 		opts = {
 			can_reason = true,
 			has_vision = false,
+			params = {
+				temperature = 0.8,
+			},
 		},
 	},
 	["google/gemini-2.5-pro"] = {
 		opts = {
 			can_reason = true,
 			has_vision = false,
+			params = {
+				temperature = 0.8,
+			},
 		},
 	},
 }
 local ALLOWED_MESSAGE_FIELDS = { "content", "role", "tool_calls", "tool_call_id" }
-local BASIC_REASONING_PARAM_MODELS = { "openai/gpt-5", "openai/gpt-5-mini" }
 
 local function shallow_copy(tbl)
 	if type(tbl) ~= "table" then
@@ -426,10 +449,13 @@ return {
 			type = "number",
 			optional = true,
 			condition = function(self)
-				local model = get_model(self)
-				return not vim.tbl_contains(BASIC_REASONING_PARAM_MODELS, model)
+				local opts = get_model_opts(self)
+				return opts and opts.params and opts.params.temperature ~= nil
 			end,
-			default = nil,
+			default = function(self)
+				local opts = get_model_opts(self)
+				return opts.params.temperature
+			end,
 			desc = "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. We generally recommend altering this or top_p but not both.",
 			validate = function(n)
 				return n >= 0 and n <= 2, "Must be between 0 and 2"
@@ -442,10 +468,13 @@ return {
 			type = "number",
 			optional = true,
 			condition = function(self)
-				local model = get_model(self)
-				return not vim.tbl_contains(BASIC_REASONING_PARAM_MODELS, model)
+				local opts = get_model_opts(self)
+				return opts and opts.params and opts.params.top_p ~= nil
 			end,
-			default = 0.8,
+			default = function(self)
+				local opts = get_model_opts(self)
+				return opts.params.top_p
+			end,
 			desc = "An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. We generally recommend altering this or temperature but not both.",
 			validate = function(n)
 				return n >= 0 and n <= 1, "Must be between 0 and 1"
@@ -458,10 +487,13 @@ return {
 			type = "list",
 			optional = true,
 			condition = function(self)
-				local model = get_model(self)
-				return not vim.tbl_contains(BASIC_REASONING_PARAM_MODELS, model)
+				local opts = get_model_opts(self)
+				return opts and opts.params and opts.params.stop ~= nil
 			end,
-			default = false,
+			default = function(self)
+				local opts = get_model_opts(self)
+				return opts.params.stop
+			end,
 			subtype = { type = "string" },
 			desc = "Up to 4 sequences where the API will stop generating further tokens.",
 			validate = function(l)
@@ -481,35 +513,41 @@ return {
 			end,
 		},
 
-		logit_bias = {
+		presence_penalty = {
 			order = 8,
 			mapping = "parameters",
-			type = "map",
+			type = "number",
 			optional = true,
 			condition = function(self)
-				local model = get_model(self)
-				return not vim.tbl_contains(BASIC_REASONING_PARAM_MODELS, model)
+				local opts = get_model_opts(self)
+				return opts and opts.params and opts.params.presence_penalty ~= nil
 			end,
-			default = nil,
-			desc = "Modify the likelihood of specified tokens appearing in the completion. Maps tokens (specified by their token ID) to an associated bias value from -100 to 100. Use https://platform.openai.com/tokenizer to find token IDs.",
-			subtype_key = { type = "integer" },
-			subtype = {
-				type = "integer",
-				validate = function(n)
-					return n >= -100 and n <= 100, "Must be between -100 and 100"
-				end,
-			},
+			default = function(self)
+				local opts = get_model_opts(self)
+				return opts.params.presence_penalty
+			end,
+			desc = "Float that penalizes new tokens based on whether they appear in the generated text so far. Values > 0 encourage the model to use new tokens, while values < 0 encourage the model to repeat tokens",
+			validate = function(n)
+				return n >= -2 and n <= 2, "Must be between -2 and 2"
+			end,
 		},
 
-		user = {
+		frequency_penalty = {
 			order = 9,
 			mapping = "parameters",
-			type = "string",
+			type = "number",
 			optional = true,
-			default = nil,
-			desc = "A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse. Learn more.",
-			validate = function(u)
-				return u:len() < 100, "Cannot be longer than 100 characters"
+			condition = function(self)
+				local opts = get_model_opts(self)
+				return opts and opts.params and opts.params.frequency_penalty ~= nil
+			end,
+			default = function(self)
+				local opts = get_model_opts(self)
+				return opts.params.frequency_penalty
+			end,
+			desc = "Float that penalizes new tokens based on their frequency in the generated text so far. Values > 0 encourage the model to use new tokens, while values < 0 encourage the model to repeat tokens",
+			validate = function(n)
+				return n >= -2 and n <= 2, "Must be between -2 and 2"
 			end,
 		},
 	},
