@@ -99,31 +99,33 @@ return {
 				},
 			},
 			adapters = {
-				openrouter = function()
-					local openrouter = require("utils.openrouter")
-					return require("codecompanion.adapters").extend(openrouter, {
-						name = "openrouter",
-						formatted_name = "Open Router",
-						env = {
-							url = "https://openrouter.ai/api",
-							api_key = "OPENROUTER_API_KEY",
-						},
-						schema = {
-							model = {
-								default = "openai/gpt-5-mini",
+				http = {
+					openrouter = function()
+						local openrouter = require("utils.openrouter")
+						return require("codecompanion.adapters.http").extend(openrouter, {
+							name = "openrouter",
+							formatted_name = "Open Router",
+							env = {
+								url = "https://openrouter.ai/api",
+								api_key = "OPENROUTER_API_KEY",
 							},
-						},
-					})
-				end,
-				gemini = function()
-					return require("codecompanion.adapters").extend("gemini", {
-						schema = {
-							model = {
-								default = "gemini-2.0-flash",
+							schema = {
+								model = {
+									default = "openai/gpt-5-mini",
+								},
 							},
-						},
-					})
-				end,
+						})
+					end,
+					gemini = function()
+						return require("codecompanion.adapters.http").extend("gemini", {
+							schema = {
+								model = {
+									default = "gemini-2.0-flash",
+								},
+							},
+						})
+					end,
+				},
 			},
 			opts = {
 				system_prompt = function()
